@@ -30,6 +30,14 @@ impl MockStream {
         }
     }
 
+    /// Creates a new mock stream with the specified bytes to read and initial written buffer capacity.
+    pub fn with_capacity(initial: &[u8], capacity: usize) -> MockStream {
+        MockStream {
+            written: Cursor::new(Vec::with_capacity(capacity)),
+            received: Cursor::new(initial.to_owned()),
+        }
+    }
+
     /// Gets a slice of bytes representing the data that has been written.
     pub fn written(&self) -> &[u8] {
         self.written.get_ref()
